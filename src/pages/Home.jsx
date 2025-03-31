@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Flame, ShoppingBag, Phone, Mail, MapPin, ArrowRight, Star, Sparkles, Globe, ChevronDown } from 'lucide-react';
+import { ShoppingBag, Phone, Mail, MapPin, ArrowRight, Star, Sparkles, Globe } from 'lucide-react';
 import Loader from '../components/Loader';
 
 // Lazy load images
@@ -8,7 +8,7 @@ const chiliImg = new URL('../Img/chili1.png', import.meta.url).href;
 const turmericImg = new URL('../Img/haldar.jpg', import.meta.url).href;
 const corianderCuminImg = new URL('../Img/jeerapowder.png', import.meta.url).href;
 const asafoetidaImg = new URL('../Img/hing.png', import.meta.url).href;
-
+const logoImg = new URL('../../public/logo.png', import.meta.url).href;
 const floatingChili = new URL('../Img/chili.png', import.meta.url).href;
 const floatingTurmeric = new URL('../Img/Turmeric.png', import.meta.url).href;
 const floatingCoriander = new URL('../Img/Coriander-Cumin.png', import.meta.url).href;
@@ -100,6 +100,14 @@ function Home() {
 
   const handleOrder = () => {
     window.open('https://wa.me/919913604063', '_blank');
+  };
+
+  const handleCall = (number) => {
+    window.location.href = `tel:+91${number}`;
+  };
+
+  const handleEmail = () => {
+    window.location.href = 'mailto:pandavprakash144@gmail.com';
   };
 
   if (!imagesLoaded) {
@@ -269,7 +277,6 @@ function Home() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <Sparkles className="w-12 h-12 text-red-600 mx-auto mb-4" />
             <h2 className="text-3xl lg:pt-4 sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-red-500 to-orange-500 text-transparent bg-clip-text">
               {isGujarati ? 'અમારા ઉત્પાદનો' : 'Our Products'}
             </h2>
@@ -342,31 +349,38 @@ function Home() {
 
           <div className="grid md:grid-cols-2 gap-12">
             <div className="space-y-8">
-              <div className="p-6 bg-red-950/10 rounded-xl border border-red-500/10">
+              <div className="p-6 bg-gradient-to-r from-red-950/20 to-transparent rounded-xl border border-red-500/10 border-r-transparent">
                 <Phone className="w-6 h-6 text-red-500 mb-4" />
                 <h3 className="text-xl font-bold mb-3 text-white">
                   {isGujarati ? 'ફોન' : 'Phone'}
                 </h3>
                 <div className="space-y-2">
                   {['9913604063', '8758035295'].map((number) => (
-                    <p key={number} className="text-gray-400">
+                    <button
+                      key={number}
+                      onClick={() => handleCall(number)}
+                      className="text-gray-400 hover:text-red-500 transition-colors duration-300 block w-full text-left"
+                    >
                       +91 {number}
-                    </p>
+                    </button>
                   ))}
                 </div>
               </div>
 
-              <div className="p-6 bg-red-950/10 rounded-xl border border-red-500/10">
+              <div className="p-6 bg-gradient-to-r from-red-950/20 to-transparent rounded-xl border border-red-500/10 border-r-transparent">
                 <Mail className="w-6 h-6 text-red-500 mb-4" />
                 <h3 className="text-xl font-bold mb-3 text-white">
                   {isGujarati ? 'ઇમેઇલ' : 'Email'}
                 </h3>
-                <p className="text-gray-400">
+                <button
+                  onClick={handleEmail}
+                  className="text-gray-400 hover:text-red-500 transition-colors duration-300 text-left"
+                >
                   pandavprakash144@gmail.com
-                </p>
+                </button>
               </div>
 
-              <div className="p-6 bg-red-950/10 rounded-xl border border-red-500/10">
+              <div className="p-6 bg-gradient-to-r from-red-950/20 to-transparent rounded-xl border border-red-500/10 border-r-transparent">
                 <MapPin className="w-6 h-6 text-red-500 mb-4" />
                 <h3 className="text-xl font-bold mb-3 text-white">
                   {isGujarati ? 'સરનામું' : 'Address'}
@@ -381,15 +395,23 @@ function Home() {
               </div>
             </div>
 
-            <div className="flex items-center justify-center">
-              <motion.img
-                src="../public/logo.png"
-                alt="Mahakali Logo"
-                className="max-w-full h-auto rounded-lg"
+            <div className="flex items-center justify-center p-4 md:p-0">
+              <motion.div
+                className="w-full max-w-[300px] md:max-w-full"
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-              />
+              >
+                <img
+                  src={logoImg}
+                  alt="Mahakali Logo"
+                  className="w-full h-auto rounded-lg shadow-lg shadow-red-500/20"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    console.error('Error loading logo image');
+                  }}
+                />
+              </motion.div>
             </div>
           </div>
         </div>

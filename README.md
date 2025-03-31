@@ -5,7 +5,7 @@
 
   Experience authentic Indian flavors with our premium spice blends
   
-  [Visit Live Website](https://mahakali-masala.netlify.app)
+  [Visit Live Website](https://mahakalimasalabhandar.netlify.app/)
 
 </div>
 
@@ -44,5 +44,5 @@ Mahakali Masala Bhandar offers a premium selection of authentic Indian spices, c
 ---
 
 <div align="center">
-  © 2024 Mahakali Masala Bhandar. All rights reserved.
+  © 2025 Mahakali Masala Bhandar. All rights reserved.
 </div>
